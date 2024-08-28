@@ -1,23 +1,12 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
-import { FlightsService } from './flights/flights.service';
-import { Flight } from './flights/flights.entity';
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
-@Controller('vuelos')
-export class FlightsController {
-  constructor(private readonly flightsService: FlightsService) {}
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
   @Get()
-  findAll(): Promise<Flight[]> {
-    return this.flightsService.findAll();
-  }
-
-  @Post('/reservar')
-  create(@Body() flight: Flight): Promise<Flight> {
-    return this.flightsService.create(flight);
-  }
-
-  @Delete('/cancelar/:id')
-  remove(@Param('id') id: number): Promise<void> {
-    return this.flightsService.remove(id);
+  getHello(): string {
+    return this.appService.getHello();
   }
 }
